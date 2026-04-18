@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  date        DateTime
+  imageUrl    String
+  skills      String[]
+  repoUrl     String?
+  liveUrl     String?
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Skill {
+  id       String @id @default(cuid())
+  name     String
+  category String
+  level    Int
+  iconSlug String
+}
+
+model Certification {
+  id         String   @id @default(cuid())
+  name       String
+  issuer     String
+  date       DateTime
+  badgeUrl   String?
+  credlyUrl  String?
+  inProgress Boolean  @default(false)
+}
+
+model Course {
+  id             String   @id @default(cuid())
+  name           String
+  platform       String
+  completedAt    DateTime
+  certificateUrl String?
+}
+
+model Article {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  summary     String
+  content     String
+  publishedAt DateTime?
+  draft       Boolean   @default(true)
+  tags        String[]
+}

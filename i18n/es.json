@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "about": "Sobre mí",
+    "skills": "Habilidades",
+    "projects": "Proyectos",
+    "certifications": "Certificaciones",
+    "blog": "Blog",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "name": "Ernesto Fierro",
+    "alias": "ErnestoFM",
+    "roles": ["Ingeniero de Software", "Especialista Backend", "Desarrollador Full Stack"],
+    "cta_cv": "Descargar CV",
+    "cta_contact": "Contáctame"
+  },
+  "about": {
+    "title": "Sobre Mí",
+    "bio": "Soy un Ingeniero de Software especializado en desarrollo backend con experiencia full stack. Construyo sistemas escalables y listos para producción usando Node.js, Java, Spring Boot y plataformas cloud. Apasionado por la arquitectura limpia, microservicios y la experiencia del desarrollador.",
+    "location": "Tonalá, Jalisco, México",
+    "available": "Disponible para oportunidades"
+  },
+  "skills": {
+    "title": "Habilidades",
+    "subtitle": "Tecnologías con las que trabajo",
+    "categories": {
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "database": "Base de Datos",
+      "cloud": "Cloud",
+      "devops": "DevOps",
+      "testing": "Testing"
+    }
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Cosas que he construido",
+    "featured": "Destacado",
+    "view_code": "Ver Código",
+    "view_demo": "Demo en Vivo",
+    "filter_all": "Todos"
+  },
+  "certifications": {
+    "title": "Certificaciones y Cursos",
+    "tab_certs": "Certificaciones",
+    "tab_courses": "Cursos",
+    "in_progress": "En Progreso",
+    "verify": "Verificar"
+  },
+  "blog": {
+    "title": "Artículos",
+    "subtitle": "Pensamientos sobre ingeniería",
+    "read_more": "Leer Más",
+    "coming_soon": "Artículos próximamente"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "Trabajemos juntos",
+    "name": "Nombre",
+    "email": "Correo",
+    "subject": "Asunto",
+    "message": "Mensaje",
+    "send": "Enviar Mensaje",
+    "success": "¡Mensaje enviado con éxito!",
+    "error": "Algo salió mal. Por favor inténtalo de nuevo."
+  },
+  "footer": {
+    "built_by": "Construido por ErnestoFM",
+    "download_cv": "Descargar CV"
+  }
+}
