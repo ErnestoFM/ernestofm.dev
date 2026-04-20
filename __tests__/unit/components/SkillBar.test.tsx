@@ -22,7 +22,16 @@ const mockSkills: Skill[] = [
 
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => <div {...props}>{children}</div>,
+    div: ({
+      children,
+      initial,
+      whileInView,
+      viewport,
+      animate,
+      exit,
+      transition,
+      ...props
+    }: React.HTMLAttributes<HTMLDivElement> & Record<string, unknown>) => <div {...props}>{children}</div>,
   },
   AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));

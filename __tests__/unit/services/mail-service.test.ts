@@ -1,16 +1,20 @@
 import { sendContactEmail } from '@/services/mail-service';
 
-const mockSendMail = jest.fn().mockResolvedValue({ messageId: 'test-123' });
+const mockSendMail = jest.fn();
 
 jest.mock('nodemailer', () => ({
-  createTransport: jest.fn().mockReturnValue({
-    sendMail: mockSendMail,
-  }),
+  __esModule: true,
+  default: {
+    createTransport: jest.fn(() => ({
+      sendMail: mockSendMail,
+    })),
+  },
 }));
 
 describe('mail-service', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    mockSendMail.mockResolvedValue({ messageId: 'test-123' });
     process.env.MAIL_FROM = 'contact@ernestofm.dev';
     process.env.MAIL_TO = 'hello@ernestofm.dev';
   });

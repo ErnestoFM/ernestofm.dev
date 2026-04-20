@@ -1,4 +1,28 @@
-import { NextRequest } from 'next/server';
+// Mock next/server first to avoid Request not defined error
+jest.mock('next/server', () => ({
+  NextRequest: class MockNextRequest {
+    public method: string;
+    public headers: Map<string, string>;
+    private bodyValue: string;
+
+    constructor(url: string, init: { method?: string; headers?: Record<string, string>; body?: string } = {}) {
+      this.method = init.method || 'GET';
+      this.headers = new Map(Object.entries(init.headers || {}));
+      this.bodyValue = init.body || '';
+    }
+
+    async json() {
+      return JSON.parse(this.bodyValue);
+    }
+  },
+  NextResponse: {
+    json: (data: any, options: any = {}) => ({
+      status: options.status || 200,
+      json: async () => data,
+    }),
+  },
+}));
+
 import { POST } from '@/app/api/contact/route';
 
 jest.mock('@/lib/redis', () => ({
@@ -20,8 +44,11 @@ jest.mock('@/services/mail-service', () => ({
 import { sendContactEmail } from '@/services/mail-service';
 const mockSendEmail = sendContactEmail as jest.Mock;
 
+// Use the mocked NextRequest
+const { NextRequest: MockNextRequest } = require('next/server');
+
 function makeRequest(body: object) {
-  return new NextRequest('http://localhost:3000/api/contact', {
+  return new MockNextRequest('http://localhost:3000/api/contact', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-forwarded-for': '127.0.0.1' },
     body: JSON.stringify(body),

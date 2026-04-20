@@ -1,0 +1,48 @@
+// Mock next/server first to avoid Request not defined error
+jest.mock('next/server', () => ({
+  NextRequest: class MockNextRequest {
+    public method: string;
+    public headers: Map<string, string>;
+    private bodyValue: string;
+
+    constructor(url: string, init: { method?: string; headers?: Record<string, string>; body?: string } = {}) {
+      this.method = init.method || 'GET';
+      this.headers = new Map(Object.entries(init.headers || {}));
+      this.bodyValue = init.body || '';
+    }
+
+    async json() {
+      return JSON.parse(this.bodyValue);
+    }
+  },
+  NextResponse: {
+    json: (data: any, options: any = {}) => ({
+      status: options.status || 200,
+      json: async () => data,
+    }),
+  },
+}));
+
+import { GET } from '@/app/api/articles/route';
+
+jest.mock('@/services/cache-service', () => ({
+  withCache: jest.fn((_key, fetcher) => fetcher()),
+  CACHE_KEYS: { ARTICLES: 'articles:published' },
+}));
+
+jest.mock('@/services/content-service', () => ({
+  getPublishedArticles: jest.fn().mockResolvedValue([
+    { id: '1', title: 'Article 1', slug: 'article-1', published: true },
+  ]),
+}));
+
+describe('GET /api/articles', () => {
+  it('returns published articles', async () => {
+    const res = await GET();
+    const data = await res.json();
+
+    expect(res.status).toBe(200);
+    expect(Array.isArray(data)).toBe(true);
+    expect(data[0].title).toBe('Article 1');
+  });
+});

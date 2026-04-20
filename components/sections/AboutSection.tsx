@@ -54,7 +54,7 @@ export default function AboutSection({ t }: AboutSectionProps) {
             <div className="relative">
               <div className="w-72 h-72 rounded-2xl overflow-hidden ring-4 ring-blue-500/30 shadow-2xl">
                 <Image
-                  src="/images/profile.jpg"
+                  src="/images/yo_foto.png"
                   alt="Ernesto Fierro"
                   width={288}
                   height={288}

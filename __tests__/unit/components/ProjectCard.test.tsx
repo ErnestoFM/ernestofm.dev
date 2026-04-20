@@ -29,8 +29,26 @@ const mockProjects: Project[] = [
 // Mock framer-motion to avoid animation issues in tests
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => <div {...props}>{children}</div>,
-    article: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => <article {...props}>{children}</article>,
+    div: ({
+      children,
+      initial,
+      whileInView,
+      viewport,
+      animate,
+      exit,
+      transition,
+      ...props
+    }: React.HTMLAttributes<HTMLDivElement> & Record<string, unknown>) => <div {...props}>{children}</div>,
+    article: ({
+      children,
+      initial,
+      whileInView,
+      viewport,
+      animate,
+      exit,
+      transition,
+      ...props
+    }: React.HTMLAttributes<HTMLElement> & Record<string, unknown>) => <article {...props}>{children}</article>,
   },
   AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
@@ -48,8 +66,8 @@ describe('ProjectsSection', () => {
 
   it('renders skill tags', () => {
     render(<ProjectsSection projects={mockProjects} t={mockTranslations} />);
-    expect(screen.getByText('Node.js')).toBeInTheDocument();
-    expect(screen.getByText('React')).toBeInTheDocument();
+    expect(screen.getAllByText('Node.js').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('React').length).toBeGreaterThan(0);
   });
 
   it('renders repo link when repoUrl provided', () => {
