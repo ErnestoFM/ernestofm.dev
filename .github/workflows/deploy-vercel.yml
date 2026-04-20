@@ -78,5 +78,32 @@ jobs:
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
 
-      - name: Desplegar a Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Mostrar versión de Vercel CLI
+        run: vercel --version
+
+      - name: Desplegar a Vercel con reintentos
+        shell: bash
+        run: |
+          set -euo pipefail
+          MAX_ATTEMPTS=3
+          ATTEMPT=1
+          WAIT_SECONDS=10
+
+          while [ "$ATTEMPT" -le "$MAX_ATTEMPTS" ]; do
+            echo "Deploy intento ${ATTEMPT}/${MAX_ATTEMPTS}"
+            if vercel deploy --prebuilt --prod --yes --token=${{ secrets.VERCEL_TOKEN }}; then
+              echo "Deploy exitoso"
+              exit 0
+            fi
+
+            if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
+              echo "Falló intento ${ATTEMPT}, reintentando en ${WAIT_SECONDS}s..."
+              sleep "$WAIT_SECONDS"
+              WAIT_SECONDS=$((WAIT_SECONDS * 2))
+            fi
+
+            ATTEMPT=$((ATTEMPT + 1))
+          done
+
+          echo "Deploy falló tras ${MAX_ATTEMPTS} intentos"
+          exit 1
