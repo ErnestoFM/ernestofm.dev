@@ -34,7 +34,6 @@ const config: Config = {
     '!app/[locale]/page.tsx',
     '!app/admin/**',
     '!app/api/auth/[...nextauth]/route.ts',
-    '!components/layout/**',
     '!components/admin/**',
     '!components/sections/AboutSection.tsx',
     '!components/sections/BlogSection.tsx',

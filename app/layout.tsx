@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { cookies } from 'next/headers';
 import './globals.css';
 import Providers from '@/components/layout/Providers';
 
@@ -36,11 +37,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const cookieTheme = cookieStore.get('theme')?.value;
+  const initialTheme = cookieTheme === 'light' || cookieTheme === 'dark' ? cookieTheme : 'dark';
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={initialTheme === 'dark' ? 'dark' : undefined} suppressHydrationWarning>
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <Providers initialTheme={initialTheme}>{children}</Providers>
       </body>
     </html>
   );

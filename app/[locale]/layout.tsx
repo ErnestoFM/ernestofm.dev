@@ -38,6 +38,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         t={{
           built_by: footer.built_by ?? 'Built by ErnestoFM',
           download_cv: footer.download_cv ?? 'Download CV',
+          whatsapp: footer.whatsapp ?? 'WhatsApp',
         }}
       />
     </NextIntlClientProvider>

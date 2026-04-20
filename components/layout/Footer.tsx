@@ -1,4 +1,7 @@
-import { Mail, Download } from 'lucide-react';
+import { Mail, Download, MessageCircle } from 'lucide-react';
+
+const WHATSAPP_URL =
+  'https://wa.me/526863873651?text=Hola%20Ernesto%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20contactarte.';
 
 // SVG Components for GitHub and LinkedIn
 const GithubIcon = ({ size = 20 }: { size?: number }) => (
@@ -29,6 +32,7 @@ interface FooterProps {
   t: {
     built_by: string;
     download_cv: string;
+    whatsapp: string;
   };
 }
 
@@ -67,6 +71,15 @@ export default function Footer({ t }: FooterProps) {
               aria-label="Email"
             >
               <Mail size={20} />
+            </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 text-gray-400 hover:text-green-400 transition-colors"
+              aria-label={t.whatsapp}
+            >
+              <MessageCircle size={20} />
             </a>
             <a
               href="/cv/ernesto-fierro-cv.pdf"

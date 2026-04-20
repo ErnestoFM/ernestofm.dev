@@ -62,11 +62,13 @@
     "subject": "Asunto",
     "message": "Mensaje",
     "send": "Enviar Mensaje",
+    "whatsapp": "Contactar por WhatsApp",
     "success": "¡Mensaje enviado con éxito!",
     "error": "Algo salió mal. Por favor inténtalo de nuevo."
   },
   "footer": {
     "built_by": "Construido por ErnestoFM",
-    "download_cv": "Descargar CV"
+    "download_cv": "Descargar CV",
+    "whatsapp": "WhatsApp"
   }
 }

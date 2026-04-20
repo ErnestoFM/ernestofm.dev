@@ -111,6 +111,7 @@ export default async function HomePage({ params }: PageProps) {
           subject: tContact('subject'),
           message: tContact('message'),
           send: tContact('send'),
+          whatsapp: tContact('whatsapp'),
           success: tContact('success'),
           error: tContact('error'),
         }}

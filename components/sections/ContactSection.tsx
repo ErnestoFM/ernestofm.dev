@@ -2,7 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, MessageCircle } from 'lucide-react';
+
+const WHATSAPP_URL =
+  'https://wa.me/526863873651?text=Hola%20Ernesto%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20contactarte.';
 
 interface ContactSectionProps {
   t: {
@@ -13,6 +16,7 @@ interface ContactSectionProps {
     subject: string;
     message: string;
     send: string;
+    whatsapp: string;
     success: string;
     error: string;
   };
@@ -129,14 +133,26 @@ export default function ContactSection({ t }: ContactSectionProps) {
             </div>
           )}
 
-          <button
-            type="submit"
-            disabled={status === 'loading'}
-            className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold rounded-xl transition-colors"
-          >
-            <Send size={16} />
-            {status === 'loading' ? '...' : t.send}
-          </button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button
+              type="submit"
+              disabled={status === 'loading'}
+              className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold rounded-xl transition-colors"
+            >
+              <Send size={16} />
+              {status === 'loading' ? '...' : t.send}
+            </button>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-colors"
+              aria-label={t.whatsapp}
+            >
+              <MessageCircle size={16} />
+              {t.whatsapp}
+            </a>
+          </div>
         </motion.form>
       </div>
     </section>

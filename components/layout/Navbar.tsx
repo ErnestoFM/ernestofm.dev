@@ -29,7 +29,7 @@ const navLinks = (t: NavbarProps['t']) => [
 ];
 
 export default function Navbar({ locale, t }: NavbarProps) {
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -51,6 +51,14 @@ export default function Navbar({ locale, t }: NavbarProps) {
     const segments = pathname.split('/');
     segments[1] = newLocale;
     router.push(segments.join('/'));
+  };
+
+  const toggleTheme = () => {
+    const activeTheme = resolvedTheme ?? theme ?? 'dark';
+    const nextTheme = activeTheme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    localStorage.setItem('theme', nextTheme);
+    document.cookie = `theme=${nextTheme}; path=/; max-age=31536000; samesite=lax`;
   };
 
   return (
@@ -75,7 +83,7 @@ export default function Navbar({ locale, t }: NavbarProps) {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-5">
             {navLinks(t).map(link => (
               <a
                 key={link.href}
@@ -98,19 +106,18 @@ export default function Navbar({ locale, t }: NavbarProps) {
               {locale.toUpperCase()}
             </button>
 
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
-            )}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              aria-label="Toggle theme"
+              data-testid="theme-toggle"
+            >
+              {!mounted || (resolvedTheme ?? theme ?? 'dark') !== 'dark' ? <Moon size={18} /> : <Sun size={18} />}
+            </button>
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="lg:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
@@ -127,7 +134,7 @@ export default function Navbar({ locale, t }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"
+            className="lg:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"
           >
             <div className="px-4 py-4 space-y-3">
               {navLinks(t).map(link => (

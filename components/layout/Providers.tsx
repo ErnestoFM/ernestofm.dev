@@ -6,12 +6,13 @@ import { ReactNode } from 'react';
 
 interface ProvidersProps {
   children: ReactNode;
+  initialTheme?: 'light' | 'dark';
 }
 
-export default function Providers({ children }: ProvidersProps) {
+export default function Providers({ children, initialTheme = 'dark' }: ProvidersProps) {
   return (
     <SessionProvider>
-      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <ThemeProvider attribute="class" defaultTheme={initialTheme} enableSystem={false}>
         {children}
       </ThemeProvider>
     </SessionProvider>
