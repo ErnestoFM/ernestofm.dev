@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { MapPin, CheckCircle, Mail } from 'lucide-react';
 import Image from 'next/image';
+import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL } from '@/lib/social-links';
 
 // SVG Components for GitHub and LinkedIn
 const GithubIcon = ({ size = 16 }: { size?: number }) => (
@@ -40,7 +41,7 @@ interface AboutSectionProps {
 
 export default function AboutSection({ t }: AboutSectionProps) {
   return (
-    <section id="about" className="py-24 bg-white dark:bg-gray-900">
+    <section id="about" className="py-24 bg-[var(--surface-0)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -70,15 +71,15 @@ export default function AboutSection({ t }: AboutSectionProps) {
 
           {/* Bio */}
           <div>
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-[var(--text-1)] mb-6">
               {t.title}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+            <p className="text-lg text-[var(--text-2)] leading-relaxed mb-6">
               {t.bio}
             </p>
 
             <div className="flex flex-wrap items-center gap-4 mb-8">
-              <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+              <div className="flex items-center gap-2 text-[var(--text-muted)]">
                 <MapPin size={16} className="text-blue-500" />
                 <span className="text-sm">{t.location}</span>
               </div>
@@ -90,26 +91,26 @@ export default function AboutSection({ t }: AboutSectionProps) {
 
             <div className="flex items-center gap-4">
               <a
-                href="https://github.com/ErnestoFM"
+                href={GITHUB_PROFILE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors text-sm font-medium"
+                className="flex items-center gap-2 px-4 py-2 bg-[var(--button-ghost-bg)] text-[var(--text-2)] hover:bg-[var(--button-ghost-hover)] rounded-lg transition-colors text-sm font-medium"
               >
                 <GithubIcon size={16} />
                 GitHub
               </a>
               <a
-                href="https://linkedin.com/in/ernestofm"
+                href={LINKEDIN_PROFILE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-900/50 rounded-lg transition-colors text-sm font-medium"
+                className="flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-900/50 rounded-lg transition-colors text-sm font-medium"
               >
                 <LinkedinIcon size={16} />
                 LinkedIn
               </a>
               <a
                 href="mailto:hello@ernestofm.dev"
-                className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors text-sm font-medium"
+                className="flex items-center gap-2 px-4 py-2 bg-[var(--button-ghost-bg)] text-[var(--text-2)] hover:bg-[var(--button-ghost-hover)] rounded-lg transition-colors text-sm font-medium"
               >
                 <Mail size={16} />
                 Email

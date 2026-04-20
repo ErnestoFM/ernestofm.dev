@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import Providers from '@/components/layout/Providers';
 
@@ -45,7 +46,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" className={initialTheme === 'dark' ? 'dark' : undefined} suppressHydrationWarning>
       <body className={inter.className}>
-        <Providers initialTheme={initialTheme}>{children}</Providers>
+        <Providers initialTheme={initialTheme}>
+          {children}
+          <Analytics />
+        </Providers>
       </body>
     </html>
   );

@@ -18,16 +18,16 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<AdminTab>('projects');
 
   return (
-    <div className="min-h-screen bg-gray-950">
+    <div className="min-h-screen bg-[var(--surface-1)] text-[var(--text-1)]">
       {/* Header */}
-      <header className="bg-gray-900 border-b border-gray-800 px-6 py-4 flex items-center justify-between">
+      <header className="bg-[var(--surface-0)] border-b border-[var(--border-1)] px-6 py-4 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-white">&lt;ErnestoFM /&gt; Admin</h1>
-          <p className="text-gray-400 text-sm">Content Management System</p>
+          <h1 className="text-xl font-bold text-[var(--text-1)]">&lt;ErnestoFM /&gt; Admin</h1>
+          <p className="text-[var(--text-muted)] text-sm">Content Management System</p>
         </div>
         <button
           onClick={() => signOut({ callbackUrl: '/' })}
-          className="flex items-center gap-2 px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors text-sm"
+          className="flex items-center gap-2 px-4 py-2 text-[var(--text-muted)] hover:text-[var(--text-1)] hover:bg-[var(--button-ghost-bg)] rounded-lg transition-colors text-sm"
         >
           <LogOut size={16} />
           Sign Out
@@ -36,7 +36,7 @@ export default function AdminDashboard() {
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className="w-56 min-h-screen bg-gray-900 border-r border-gray-800 p-4">
+        <aside className="w-56 min-h-screen bg-[var(--surface-0)] border-r border-[var(--border-1)] p-4">
           <nav className="space-y-1">
             {tabs.map(tab => (
               <button
@@ -44,8 +44,8 @@ export default function AdminDashboard() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   activeTab === tab.id
-                    ? 'bg-blue-600 text-white'
-                    : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                    ? 'bg-[var(--button-primary-bg)] text-white'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text-1)] hover:bg-[var(--button-ghost-bg)]'
                 }`}
               >
                 {tab.icon}
@@ -57,13 +57,13 @@ export default function AdminDashboard() {
 
         {/* Content */}
         <main className="flex-1 p-8">
-          <h2 className="text-2xl font-bold text-white mb-6 capitalize">{activeTab}</h2>
-          <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
-            <p className="text-gray-400">
-              CRUD interface for <strong className="text-white capitalize">{activeTab}</strong> — connect to{' '}
+          <h2 className="text-2xl font-bold text-[var(--text-1)] mb-6 capitalize">{activeTab}</h2>
+          <div className="bg-[var(--surface-0)] rounded-2xl border border-[var(--border-1)] p-6">
+            <p className="text-[var(--text-2)]">
+              CRUD interface for <strong className="text-[var(--text-1)] capitalize">{activeTab}</strong> — connect to{' '}
               <code className="text-blue-400 text-sm">/api/{activeTab}</code>
             </p>
-            <p className="text-gray-500 text-sm mt-2">
+            <p className="text-[var(--text-muted)] text-sm mt-2">
               Use the API endpoints directly or extend this panel with full form UI for each entity.
             </p>
           </div>

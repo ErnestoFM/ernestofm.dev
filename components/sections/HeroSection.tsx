@@ -4,6 +4,8 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { Download, Mail } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL } from '@/lib/social-links';
 
 // SVG Components for GitHub and LinkedIn
 const GithubIcon = ({ size = 22 }: { size?: number }) => (
@@ -43,6 +45,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ t }: HeroSectionProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -82,7 +85,8 @@ export default function HeroSection({ t }: HeroSectionProps) {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(99, 102, 241, ${p.opacity})`;
+        const particleRgb = resolvedTheme === 'dark' ? '99, 102, 241' : '37, 99, 235';
+        ctx.fillStyle = `rgba(${particleRgb}, ${p.opacity})`;
         ctx.fill();
       });
 
@@ -96,7 +100,8 @@ export default function HeroSection({ t }: HeroSectionProps) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - dist / 120)})`;
+            const particleRgb = resolvedTheme === 'dark' ? '99, 102, 241' : '37, 99, 235';
+            ctx.strokeStyle = `rgba(${particleRgb}, ${0.15 * (1 - dist / 120)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -118,7 +123,7 @@ export default function HeroSection({ t }: HeroSectionProps) {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [resolvedTheme]);
 
   const typeSequence = t.roles.reduce<(string | number)[]>((acc, role) => {
     acc.push(role, 2000);
@@ -126,7 +131,10 @@ export default function HeroSection({ t }: HeroSectionProps) {
   }, []);
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-950">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[var(--surface-hero)]"
+    >
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
@@ -139,12 +147,12 @@ export default function HeroSection({ t }: HeroSectionProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <p className="text-blue-400 font-mono text-lg mb-3">{t.greeting}</p>
-          <h1 className="text-5xl sm:text-7xl font-extrabold text-white mb-2">
+          <p className="text-blue-500 dark:text-blue-400 font-mono text-lg mb-3">{t.greeting}</p>
+          <h1 className="text-5xl sm:text-7xl font-extrabold text-[var(--text-1)] mb-2">
             {t.name}
           </h1>
-          <p className="text-gray-500 font-mono text-xl mb-6">@{t.alias}</p>
-          <div className="text-2xl sm:text-3xl font-medium text-gray-300 mb-10 h-10">
+          <p className="text-[var(--text-muted)] font-mono text-xl mb-6">@{t.alias}</p>
+          <div className="text-2xl sm:text-3xl font-medium text-[var(--text-2)] mb-10 h-10">
             <TypeAnimation
               sequence={typeSequence}
               wrapper="span"
@@ -157,14 +165,14 @@ export default function HeroSection({ t }: HeroSectionProps) {
             <a
               href="/cv/ernesto-fierro-cv.pdf"
               download
-              className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all hover:scale-105 shadow-lg shadow-blue-600/25"
+              className="flex items-center gap-2 px-6 py-3 bg-[var(--button-primary-bg)] hover:bg-[var(--button-primary-hover)] text-white font-semibold rounded-xl transition-all hover:scale-105 shadow-lg shadow-blue-600/25"
             >
               <Download size={18} />
               {t.cta_cv}
             </a>
             <a
               href="#contact"
-              className="flex items-center gap-2 px-6 py-3 border border-blue-500 text-blue-400 hover:bg-blue-500/10 font-semibold rounded-xl transition-all hover:scale-105"
+              className="flex items-center gap-2 px-6 py-3 border border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-500/10 font-semibold rounded-xl transition-all hover:scale-105"
             >
               <Mail size={18} />
               {t.cta_contact}
@@ -173,26 +181,26 @@ export default function HeroSection({ t }: HeroSectionProps) {
 
           <div className="flex items-center justify-center gap-6">
             <a
-              href="https://github.com/ErnestoFM"
+              href={GITHUB_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-all"
+              className="p-3 text-[var(--text-muted)] hover:text-[var(--text-1)] hover:bg-[var(--button-ghost-bg)] rounded-full transition-all"
               aria-label="GitHub"
             >
               <GithubIcon size={22} />
             </a>
             <a
-              href="https://linkedin.com/in/ernestofm"
+              href={LINKEDIN_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-all"
+              className="p-3 text-[var(--text-muted)] hover:text-[var(--text-1)] hover:bg-[var(--button-ghost-bg)] rounded-full transition-all"
               aria-label="LinkedIn"
             >
               <LinkedinIcon size={22} />
             </a>
             <a
               href="mailto:hello@ernestofm.dev"
-              className="p-3 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-all"
+              className="p-3 text-[var(--text-muted)] hover:text-[var(--text-1)] hover:bg-[var(--button-ghost-bg)] rounded-full transition-all"
               aria-label="Email"
             >
               <Mail size={22} />
@@ -206,9 +214,9 @@ export default function HeroSection({ t }: HeroSectionProps) {
           transition={{ delay: 1.5, duration: 1 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <a href="#about" className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300 transition-colors">
+          <a href="#about" className="flex flex-col items-center gap-1 text-[var(--text-muted)] hover:text-[var(--text-2)] transition-colors">
             <span className="text-xs font-mono">scroll</span>
-            <div className="w-px h-8 bg-gradient-to-b from-gray-500 to-transparent" />
+            <div className="w-px h-8 bg-gradient-to-b from-[var(--text-muted)] to-transparent" />
           </a>
         </motion.div>
       </div>

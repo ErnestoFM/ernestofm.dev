@@ -3,11 +3,37 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --surface-hero: #f8fafc;
+  --surface-0: #ffffff;
+  --surface-1: #f3f4f6;
+  --surface-2: #e5e7eb;
+  --text-1: #111827;
+  --text-2: #374151;
+  --text-muted: #6b7280;
+  --border-1: #d1d5db;
+  --button-primary-bg: #2563eb;
+  --button-primary-hover: #1d4ed8;
+  --button-ghost-bg: #eef2ff;
+  --button-ghost-hover: #dbeafe;
+  --hero-particle-rgb: 37, 99, 235;
 }
 
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --surface-hero: #030712;
+  --surface-0: #111827;
+  --surface-1: #030712;
+  --surface-2: #1f2937;
+  --text-1: #f9fafb;
+  --text-2: #d1d5db;
+  --text-muted: #9ca3af;
+  --border-1: #374151;
+  --button-primary-bg: #2563eb;
+  --button-primary-hover: #1e40af;
+  --button-ghost-bg: #1f2937;
+  --button-ghost-hover: #374151;
+  --hero-particle-rgb: 99, 102, 241;
 }
 
 * {
