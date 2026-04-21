@@ -1,6 +1,5 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Lock } from 'lucide-react';
@@ -16,6 +15,7 @@ export default function AdminLogin() {
     e.preventDefault();
     setLoading(true);
     setError('');
+    const { signIn } = await import('next-auth/react');
     const result = await signIn('credentials', { email, password, redirect: false });
     if (result?.error) {
       setError('Invalid credentials');

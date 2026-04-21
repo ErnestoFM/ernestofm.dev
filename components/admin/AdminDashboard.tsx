@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { signOut } from 'next-auth/react';
 import { LogOut, Briefcase, Zap, Award, BookOpen, FileText } from 'lucide-react';
 
 type AdminTab = 'projects' | 'skills' | 'certifications' | 'courses' | 'articles';
@@ -17,6 +16,11 @@ const tabs: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<AdminTab>('projects');
 
+  const handleSignOut = async () => {
+    const { signOut } = await import('next-auth/react');
+    await signOut({ callbackUrl: '/' });
+  };
+
   return (
     <div className="min-h-screen bg-[var(--surface-1)] text-[var(--text-1)]">
       {/* Header */}
@@ -26,7 +30,7 @@ export default function AdminDashboard() {
           <p className="text-[var(--text-muted)] text-sm">Content Management System</p>
         </div>
         <button
-          onClick={() => signOut({ callbackUrl: '/' })}
+          onClick={handleSignOut}
           className="flex items-center gap-2 px-4 py-2 text-[var(--text-muted)] hover:text-[var(--text-1)] hover:bg-[var(--button-ghost-bg)] rounded-lg transition-colors text-sm"
         >
           <LogOut size={16} />
