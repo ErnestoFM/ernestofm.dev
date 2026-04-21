@@ -1,9 +1,43 @@
 import { Redis } from '@upstash/redis';
 
-export const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-});
+type RedisLike = {
+  get<T>(key: string): Promise<T | null>;
+  set(key: string, value: unknown, options?: { ex?: number }): Promise<unknown>;
+  del(key: string): Promise<unknown>;
+  incr(key: string): Promise<number>;
+  expire(key: string, seconds: number): Promise<unknown>;
+};
+
+function createNoopRedis(): RedisLike {
+  return {
+    async get<T>() {
+      return null as T | null;
+    },
+    async set() {
+      return null;
+    },
+    async del() {
+      return 0;
+    },
+    async incr() {
+      return 1;
+    },
+    async expire() {
+      return 0;
+    },
+  };
+}
+
+const redisUrl = process.env.UPSTASH_REDIS_REST_URL?.trim();
+const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN?.trim();
+
+export const redis: RedisLike =
+  redisUrl && redisToken
+    ? new Redis({
+        url: redisUrl,
+        token: redisToken,
+      })
+    : createNoopRedis();
 
 export const CACHE_TTL = 300; // 5 minutes
 
