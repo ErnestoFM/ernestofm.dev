@@ -28,16 +28,31 @@ function createNoopRedis(): RedisLike {
   };
 }
 
-const redisUrl = process.env.UPSTASH_REDIS_REST_URL?.trim();
-const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN?.trim();
+function initializeRedis(): RedisLike {
+  try {
+    const redisUrl = process.env.UPSTASH_REDIS_REST_URL?.trim();
+    const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN?.trim();
 
-export const redis: RedisLike =
-  redisUrl && redisToken
-    ? new Redis({
-        url: redisUrl,
-        token: redisToken,
-      })
-    : createNoopRedis();
+    if (redisUrl && redisToken) {
+      try {
+        return new Redis({
+          url: redisUrl,
+          token: redisToken,
+        });
+      } catch (error) {
+        console.warn('Failed to initialize Redis:', error);
+        return createNoopRedis();
+      }
+    }
+
+    return createNoopRedis();
+  } catch (error) {
+    console.warn('Error during Redis initialization:', error);
+    return createNoopRedis();
+  }
+}
+
+export const redis: RedisLike = initializeRedis();
 
 export const CACHE_TTL = 300; // 5 minutes
 
