@@ -7,7 +7,6 @@ import Providers from '@/components/layout/Providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const runtime = 'nodejs';
 
 export const metadata: Metadata = {
   title: {
