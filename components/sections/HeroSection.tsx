@@ -133,7 +133,7 @@ export default function HeroSection({ t }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[var(--surface-hero)]"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-50 dark:bg-slate-950"
     >
       <canvas
         ref={canvasRef}
@@ -148,11 +148,11 @@ export default function HeroSection({ t }: HeroSectionProps) {
           transition={{ duration: 0.7 }}
         >
           <p className="text-blue-500 dark:text-blue-400 font-mono text-lg mb-3">{t.greeting}</p>
-          <h1 className="text-5xl sm:text-7xl font-extrabold text-[var(--text-1)] mb-2">
+          <h1 className="text-5xl sm:text-7xl font-extrabold text-gray-900 dark:text-gray-50 mb-2">
             {t.name}
           </h1>
-          <p className="text-[var(--text-muted)] font-mono text-xl mb-6">@{t.alias}</p>
-          <div className="text-2xl sm:text-3xl font-medium text-[var(--text-2)] mb-10 h-10">
+          <p className="text-gray-600 dark:text-gray-400 font-mono text-xl mb-6">@{t.alias}</p>
+          <div className="text-2xl sm:text-3xl font-medium text-gray-800 dark:text-gray-100 mb-10 h-10">
             <TypeAnimation
               sequence={typeSequence}
               wrapper="span"
@@ -184,7 +184,7 @@ export default function HeroSection({ t }: HeroSectionProps) {
               href={GITHUB_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-[var(--text-muted)] hover:text-[var(--text-1)] hover:bg-[var(--button-ghost-bg)] rounded-full transition-all"
+              className="p-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-all"
               aria-label="GitHub"
             >
               <GithubIcon size={22} />
@@ -193,14 +193,14 @@ export default function HeroSection({ t }: HeroSectionProps) {
               href={LINKEDIN_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-[var(--text-muted)] hover:text-[var(--text-1)] hover:bg-[var(--button-ghost-bg)] rounded-full transition-all"
+              className="p-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-all"
               aria-label="LinkedIn"
             >
               <LinkedinIcon size={22} />
             </a>
             <a
               href="mailto:hello@ernestofm.dev"
-              className="p-3 text-[var(--text-muted)] hover:text-[var(--text-1)] hover:bg-[var(--button-ghost-bg)] rounded-full transition-all"
+              className="p-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-all"
               aria-label="Email"
             >
               <Mail size={22} />
@@ -214,9 +214,9 @@ export default function HeroSection({ t }: HeroSectionProps) {
           transition={{ delay: 1.5, duration: 1 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <a href="#about" className="flex flex-col items-center gap-1 text-[var(--text-muted)] hover:text-[var(--text-2)] transition-colors">
+          <a href="#about" className="flex flex-col items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-100 transition-colors">
             <span className="text-xs font-mono">scroll</span>
-            <div className="w-px h-8 bg-gradient-to-b from-[var(--text-muted)] to-transparent" />
+            <div className="w-px h-8 bg-gradient-to-b from-gray-600 dark:from-gray-400 to-transparent" />
           </a>
         </motion.div>
       </div>

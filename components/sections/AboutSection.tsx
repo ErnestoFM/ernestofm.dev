@@ -41,7 +41,7 @@ interface AboutSectionProps {
 
 export default function AboutSection({ t }: AboutSectionProps) {
   return (
-    <section id="about" className="py-24 bg-[var(--surface-0)]">
+    <section id="about" className="py-24 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -71,15 +71,15 @@ export default function AboutSection({ t }: AboutSectionProps) {
 
           {/* Bio */}
           <div>
-            <h2 className="text-4xl font-bold text-[var(--text-1)] mb-6">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-50 mb-6">
               {t.title}
             </h2>
-            <p className="text-lg text-[var(--text-2)] leading-relaxed mb-6">
+            <p className="text-lg text-gray-800 dark:text-gray-100 leading-relaxed mb-6">
               {t.bio}
             </p>
 
             <div className="flex flex-wrap items-center gap-4 mb-8">
-              <div className="flex items-center gap-2 text-[var(--text-muted)]">
+              <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                 <MapPin size={16} className="text-blue-500" />
                 <span className="text-sm">{t.location}</span>
               </div>
@@ -94,7 +94,7 @@ export default function AboutSection({ t }: AboutSectionProps) {
                 href={GITHUB_PROFILE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-[var(--button-ghost-bg)] text-[var(--text-2)] hover:bg-[var(--button-ghost-hover)] rounded-lg transition-colors text-sm font-medium"
+                className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors text-sm font-medium"
               >
                 <GithubIcon size={16} />
                 GitHub
@@ -110,7 +110,7 @@ export default function AboutSection({ t }: AboutSectionProps) {
               </a>
               <a
                 href="mailto:hello@ernestofm.dev"
-                className="flex items-center gap-2 px-4 py-2 bg-[var(--button-ghost-bg)] text-[var(--text-2)] hover:bg-[var(--button-ghost-hover)] rounded-lg transition-colors text-sm font-medium"
+                className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors text-sm font-medium"
               >
                 <Mail size={16} />
                 Email

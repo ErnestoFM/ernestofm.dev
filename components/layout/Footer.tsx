@@ -39,12 +39,12 @@ interface FooterProps {
 
 export default function Footer({ t }: FooterProps) {
   return (
-    <footer className="bg-[var(--surface-1)] border-t border-[var(--border-1)]">
+    <footer className="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <p className="text-2xl font-bold text-[var(--text-1)]">&lt;ErnestoFM /&gt;</p>
-            <p className="text-[var(--text-muted)] mt-1">Ernesto Fierro · Software Engineer</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-gray-50">&lt;ErnestoFM /&gt;</p>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">Ernesto Fierro · Software Engineer</p>
           </div>
 
           <div className="flex items-center gap-4">
@@ -52,7 +52,7 @@ export default function Footer({ t }: FooterProps) {
               href={GITHUB_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-[var(--text-muted)] hover:text-[var(--text-1)] transition-colors"
+              className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 transition-colors"
               aria-label="GitHub"
             >
               <GithubIcon size={20} />
@@ -61,14 +61,14 @@ export default function Footer({ t }: FooterProps) {
               href={LINKEDIN_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-[var(--text-muted)] hover:text-[var(--text-1)] transition-colors"
+              className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 transition-colors"
               aria-label="LinkedIn"
             >
               <LinkedinIcon size={20} />
             </a>
             <a
               href="mailto:hello@ernestofm.dev"
-              className="p-2 text-[var(--text-muted)] hover:text-[var(--text-1)] transition-colors"
+              className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 transition-colors"
               aria-label="Email"
             >
               <Mail size={20} />
@@ -93,8 +93,8 @@ export default function Footer({ t }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-[var(--border-1)] text-center">
-          <p className="text-[var(--text-muted)] text-sm">
+        <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
+          <p className="text-gray-600 dark:text-gray-400 text-sm">
             © {new Date().getFullYear()} {t.built_by} · Tonalá, Jalisco, México
           </p>
         </div>
