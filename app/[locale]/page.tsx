@@ -6,9 +6,10 @@ import ProjectsSection from '@/components/sections/ProjectsSection';
 import CertificationsSection from '@/components/sections/CertificationsSection';
 import BlogSection from '@/components/sections/BlogSection';
 import ContactSection from '@/components/sections/ContactSection';
+import { getSiteUrl } from '@/lib/site-url';
 
 async function fetchData(endpoint: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
+  const baseUrl = getSiteUrl();
   try {
     const res = await fetch(`${baseUrl}/api/${endpoint}`, { next: { revalidate: 300 } });
     if (!res.ok) return [];
