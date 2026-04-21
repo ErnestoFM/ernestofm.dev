@@ -1,7 +1,6 @@
 'use client';
 
 import { ThemeProvider } from 'next-themes';
-import { SessionProvider } from 'next-auth/react';
 import { ReactNode } from 'react';
 
 interface ProvidersProps {
@@ -11,10 +10,8 @@ interface ProvidersProps {
 
 export default function Providers({ children, initialTheme = 'dark' }: ProvidersProps) {
   return (
-    <SessionProvider>
-      <ThemeProvider attribute="class" defaultTheme={initialTheme} enableSystem={false}>
-        {children}
-      </ThemeProvider>
-    </SessionProvider>
+    <ThemeProvider attribute="class" defaultTheme={initialTheme} enableSystem={false}>
+      {children}
+    </ThemeProvider>
   );
 }
