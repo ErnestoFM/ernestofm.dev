@@ -33,7 +33,7 @@ function initializeRedis(): RedisLike {
     const redisUrl = process.env.UPSTASH_REDIS_REST_URL?.trim();
     const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN?.trim();
 
-    if (redisUrl && redisToken) {
+    if (redisUrl && redisUrl.length > 0 && redisToken && redisToken.length > 0) {
       try {
         return new Redis({
           url: redisUrl,
