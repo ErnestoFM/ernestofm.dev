@@ -1,12 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { cookies } from 'next/headers';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import Providers from '@/components/layout/Providers';
 
 const inter = Inter({ subsets: ['latin'] });
-
 
 export const metadata: Metadata = {
   title: {
@@ -39,15 +37,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const cookieStore = await cookies();
-  const cookieTheme = cookieStore.get('theme')?.value;
-  const initialTheme = cookieTheme === 'light' || cookieTheme === 'dark' ? cookieTheme : 'dark';
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={initialTheme === 'dark' ? 'dark' : undefined} suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body className={inter.className}>
-        <Providers initialTheme={initialTheme}>
+        <Providers initialTheme="dark">
           {children}
           <Analytics />
         </Providers>

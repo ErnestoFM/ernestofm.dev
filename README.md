@@ -12,23 +12,23 @@ Personal portfolio website for **Ernesto Fierro (ErnestoFM)** — Software Engin
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| **Framework** | Next.js 14+ (App Router) |
-| **Language** | TypeScript |
-| **Styling** | Tailwind CSS + Framer Motion |
-| **Animations** | Framer Motion + Canvas API |
-| **i18n** | next-intl (EN/ES) |
-| **Themes** | next-themes (Dark/Light) |
-| **Database** | PostgreSQL via Prisma ORM |
-| **Cache** | Redis via Upstash |
-| **Auth** | NextAuth.js (JWT credentials) |
-| **Email** | Nodemailer / Resend |
-| **Images** | Cloudinary (image microservice) |
-| **Deployment** | Vercel |
-| **CI/CD** | GitHub Actions (6 workflows) |
-| **Containers** | Docker + Docker Compose |
-| **Testing** | Jest + Testing Library + Playwright |
+| Layer          | Technology                          |
+| -------------- | ----------------------------------- |
+| **Framework**  | Next.js 14+ (App Router)            |
+| **Language**   | TypeScript                          |
+| **Styling**    | Tailwind CSS + Framer Motion        |
+| **Animations** | Framer Motion + Canvas API          |
+| **i18n**       | next-intl (EN/ES)                   |
+| **Themes**     | next-themes (Dark/Light)            |
+| **Database**   | PostgreSQL via Prisma ORM           |
+| **Cache**      | Redis via Upstash                   |
+| **Auth**       | NextAuth.js (JWT credentials)       |
+| **Email**      | Nodemailer / Resend                 |
+| **Images**     | Cloudinary (image microservice)     |
+| **Deployment** | Vercel                              |
+| **CI/CD**      | GitHub Actions (6 workflows)        |
+| **Containers** | Docker + Docker Compose             |
+| **Testing**    | Jest + Testing Library + Playwright |
 
 ---
 
@@ -151,23 +151,23 @@ Open [http://localhost:3000](http://localhost:3000).
 
 Copy `.env.example` to `.env.local` and fill in all values:
 
-| Variable | Description | Required |
-|---|---|---|
-| `DATABASE_URL` | PostgreSQL connection string | ✅ |
-| `DATABASE_URL_TEST` | Test database URL | Dev |
-| `UPSTASH_REDIS_REST_URL` | Upstash Redis REST URL | ✅ |
-| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token | ✅ |
-| `NEXTAUTH_SECRET` | NextAuth JWT secret (random string) | ✅ |
-| `NEXTAUTH_URL` | App base URL | ✅ |
-| `ADMIN_EMAIL` | Admin login email | ✅ |
-| `ADMIN_PASSWORD_HASH` | bcrypt hash of admin password | ✅ |
-| `RESEND_API_KEY` | Resend API key for emails | Email |
-| `MAIL_FROM` | Sender email address | Email |
-| `MAIL_TO` | Recipient email for contact form | Email |
-| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name | Images |
-| `CLOUDINARY_API_KEY` | Cloudinary API key | Images |
-| `CLOUDINARY_API_SECRET` | Cloudinary API secret | Images |
-| `NEXT_PUBLIC_APP_URL` | Public app URL | ✅ |
+| Variable                   | Description                         | Required |
+| -------------------------- | ----------------------------------- | -------- |
+| `DATABASE_URL`             | PostgreSQL connection string        | ✅       |
+| `DATABASE_URL_TEST`        | Test database URL                   | Dev      |
+| `UPSTASH_REDIS_REST_URL`   | Upstash Redis REST URL              | ✅       |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token            | ✅       |
+| `NEXTAUTH_SECRET`          | NextAuth JWT secret (random string) | ✅       |
+| `NEXTAUTH_URL`             | App base URL                        | ✅       |
+| `ADMIN_EMAIL`              | Admin login email                   | ✅       |
+| `ADMIN_PASSWORD_HASH`      | bcrypt hash of admin password       | ✅       |
+| `RESEND_API_KEY`           | Resend API key for emails           | Email    |
+| `MAIL_FROM`                | Sender email address                | Email    |
+| `MAIL_TO`                  | Recipient email for contact form    | Email    |
+| `CLOUDINARY_CLOUD_NAME`    | Cloudinary cloud name               | Images   |
+| `CLOUDINARY_API_KEY`       | Cloudinary API key                  | Images   |
+| `CLOUDINARY_API_SECRET`    | Cloudinary API secret               | Images   |
+| `NEXT_PUBLIC_APP_URL`      | Public app URL                      | ✅       |
 
 ### Generating Admin Password Hash
 
@@ -211,6 +211,19 @@ __tests__/
     ├── navigation.test.ts      # Page navigation flows
     └── contact-form.test.ts    # Contact form behavior
 ```
+
+#### API Integration Coverage
+
+- Todas las rutas API usan validación estricta con Zod y manejo de errores consistente.
+- La ruta `/api/skills` está cubierta con tests de integración para:
+  - GET exitoso y error de caché/servicio
+  - POST sin sesión (401), payload inválido (400), éxito (201), error de dependencia (500)
+  - Validación de efectos secundarios: llamadas a createSkill, invalidateCache y mocks de sesión
+- El patrón de tests sigue el estilo de [projects](__tests__/integration/api/projects.test.ts), [contact](__tests__/integration/api/contact.test.ts) y [certifications](__tests__/integration/api/certifications.test.ts).
+
+#### Notas de testing avanzado
+
+- Si Jest muestra el warning `Haste module naming collision` por `package.json` duplicado en `.next/standalone`, limpia la carpeta `.next` antes de correr tests para evitar ruido.
 
 ---
 
@@ -270,14 +283,14 @@ docker run -p 3000:3000 --env-file .env.local ernestofm.dev
 
 ## CI/CD Workflows
 
-| Workflow | Trigger | Purpose |
-|---|---|---|
-| `deploy-vercel.yml` | Push to `main` | Run tests → build → deploy to Vercel |
-| `unit-tests.yml` | PR to `main`/`develop` | Jest tests + 70% coverage gate |
-| `lint-and-format.yml` | Pull request | ESLint + Prettier check |
-| `secret-scan.yml` | Every push | Gitleaks secret scanning |
-| `dependency-audit.yml` | Every Monday 08:00 UTC | `npm audit` + auto issue creation |
-| `docker-build.yml` | Push to `main` | Build Docker image → push to GHCR |
+| Workflow               | Trigger                | Purpose                              |
+| ---------------------- | ---------------------- | ------------------------------------ |
+| `deploy-vercel.yml`    | Push to `main`         | Run tests → build → deploy to Vercel |
+| `unit-tests.yml`       | PR to `main`/`develop` | Jest tests + 70% coverage gate       |
+| `lint-and-format.yml`  | Pull request           | ESLint + Prettier check              |
+| `secret-scan.yml`      | Every push             | Gitleaks secret scanning             |
+| `dependency-audit.yml` | Every Monday 08:00 UTC | `npm audit` + auto issue creation    |
+| `docker-build.yml`     | Push to `main`         | Build Docker image → push to GHCR    |
 
 ### Required Secrets
 
@@ -299,6 +312,7 @@ Set these in **GitHub → Settings → Secrets → Actions**:
 Access the admin panel at `/admin` (requires credentials from environment variables).
 
 ### Admin Features
+
 - View/create/update/delete Projects
 - Manage Skills by category and level
 - Add Certifications and Courses
@@ -312,6 +326,7 @@ Access the admin panel at `/admin` (requires credentials from environment variab
 The site supports English (`/en`) and Spanish (`/es`) via `next-intl`.
 
 To add a new locale:
+
 1. Add translations to `i18n/[locale].json`
 2. Add the locale to `middleware.ts` locales array
 3. Add the locale to `app/[locale]/layout.tsx` validation
