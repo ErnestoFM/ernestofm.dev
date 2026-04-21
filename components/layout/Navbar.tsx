@@ -32,13 +32,8 @@ export default function Navbar({ locale, t }: NavbarProps) {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -112,7 +107,7 @@ export default function Navbar({ locale, t }: NavbarProps) {
               aria-label="Toggle theme"
               data-testid="theme-toggle"
             >
-              {!mounted || (resolvedTheme ?? theme ?? 'dark') !== 'dark' ? <Moon size={18} /> : <Sun size={18} />}
+              {(resolvedTheme ?? theme ?? 'dark') !== 'dark' ? <Moon size={18} /> : <Sun size={18} />}
             </button>
 
             {/* Mobile menu button */}
